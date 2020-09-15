@@ -31,7 +31,8 @@ namespace HW1
         /// <returns>a list of unique elements.</returns>
         public int[] RemoveDuplicates(int[] list)
         {
-            return null;
+            int[] noDupes = list.Distinct().ToArray();
+            return noDupes;
         }
 
     }
