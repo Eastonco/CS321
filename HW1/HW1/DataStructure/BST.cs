@@ -2,10 +2,7 @@
 // Copyright (c) Connor Easton (11557902). All rights reserved.
 // </copyright>
 
-using Microsoft.VisualStudio.TestPlatform.Utilities;
-using NUnit.Framework;
 using System;
-using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace BinarySearchTree
@@ -45,7 +42,7 @@ namespace BinarySearchTree
         {
             if (this.Root != null)
             {
-                return this.Root.NodeCount ;
+                return this.Root.NodeCount + 1;
             }
 
             return 0;
@@ -101,7 +98,7 @@ namespace BinarySearchTree
         }
 
         /// <summary>
-        /// Recursive helper function to create return print string
+        /// Recursive helper function to create return print string.
         /// </summary>
         /// <param name="pcur">current node.</param>
         /// <param name="output">string to be built on.</param>
@@ -132,11 +129,10 @@ namespace BinarySearchTree
                 if (pcur.LeftNode == null)
                 {
                     pcur.LeftNode = new Node(value);
-
                 }
                 else
                 {
-                    InsertHelper(pcur.LeftNode, value);
+                    this.InsertHelper(pcur.LeftNode, value);
                 }
             }
             else
@@ -147,7 +143,7 @@ namespace BinarySearchTree
                 }
                 else
                 {
-                    InsertHelper(pcur.RightNode, value);
+                    this.InsertHelper(pcur.RightNode, value);
                 }
             }
         }

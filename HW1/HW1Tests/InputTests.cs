@@ -30,6 +30,9 @@ namespace HW1.Test
             Assert.AreEqual(inputList, io.GetInput(stringReader));
         }
 
+        /// <summary>
+        /// Simulated Test to remove duplicates from a list.
+        /// </summary>
         [Test]
         public void RemoveDuplicates()
         {

@@ -34,6 +34,5 @@ namespace HW1
             int[] noDupes = list.Distinct().ToArray();
             return noDupes;
         }
-
     }
 }
