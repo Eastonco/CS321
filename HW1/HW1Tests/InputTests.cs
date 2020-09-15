@@ -1,8 +1,9 @@
-﻿// <copyright file="HW1Tests.cs" company="Connor Easton (11557902)">
+﻿// <copyright file="InputTests.cs" company="Connor Easton (11557902)">
 // Copyright (c) Connor Easton (11557902). All rights reserved.
 // </copyright>
 
 using System.IO;
+using BinarySearchTree;
 using NUnit.Framework;
 
 namespace HW1.Test
@@ -11,13 +12,13 @@ namespace HW1.Test
     /// HW1 test class.
     /// </summary>
     [TestFixture]
-    public class HW1Tests
+    public class InputTests
     {
         /// <summary>
         /// funciton to test inputs.
         /// </summary>
         [Test]
-        public void InputTests()
+        public void SimulatedInput()
         {
             Input io = new Input();
             int[] inputList = { 1, 2, 3 };
