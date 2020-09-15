@@ -29,5 +29,15 @@ namespace HW1.Test
             // normal use would use Console.in, for tests we make a string reader
             Assert.AreEqual(inputList, io.GetInput(stringReader));
         }
+
+        [Test]
+        public void RemoveDuplicates()
+        {
+            Input io = new Input();
+            int[] inputlist = { 3, 3, 5, 12, 8, 3, 7, 7, 3 };
+            int[] shouldReturn = { 3, 5, 12, 8, 7 };
+
+            Assert.AreEqual(shouldReturn, io.RemoveDuplicates(inputlist));
+        }
     }
 }

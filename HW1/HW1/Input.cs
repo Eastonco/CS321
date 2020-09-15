@@ -4,6 +4,7 @@
 
 using System;
 using System.IO;
+using System.Linq;
 
 namespace HW1
 {
@@ -22,5 +23,16 @@ namespace HW1
             int[] parsed = Array.ConvertAll(reader.ReadLine().Split(" "), int.Parse);
             return parsed;
         }
+
+        /// <summary>
+        /// A function to remove duplicates from a list.
+        /// </summary>
+        /// <param name="list">a list of non unique elements.</param>
+        /// <returns>a list of unique elements.</returns>
+        public int[] RemoveDuplicates(int[] list)
+        {
+            return null;
+        }
+
     }
 }
