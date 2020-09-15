@@ -24,6 +24,7 @@ namespace BinarySearchTree
         /// <param name="data">integer input.</param>
         public Node(int data)
         {
+            this.Data = data;
         }
 
         /// <summary>
