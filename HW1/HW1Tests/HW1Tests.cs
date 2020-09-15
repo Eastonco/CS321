@@ -2,15 +2,24 @@
 // Copyright (c) Connor Easton (11557902). All rights reserved.
 // </copyright>
 
-using System;
 using NUnit.Framework;
 
-namespace HW1.Tests
+namespace HW1.Test
 {
+    /// <summary>
+    /// HW1 test class.
+    /// </summary>
     public class HW1Tests
     {
-        public void AllTests()
+        /// <summary>
+        /// funciton to test inputs.
+        /// </summary>
+        public void InputTests()
         {
+            Input io = new Input();
+            int[] inputList = { 1, 2, 3 };
+
+            Assert.AreEqual(inputList, io.GetInput());
         }
     }
 }
