@@ -2,6 +2,10 @@
 // Copyright (c) Connor Easton (11557902). All rights reserved.
 // </copyright>
 
+using Microsoft.VisualStudio.TestPlatform.Utilities;
+using NUnit.Framework;
+using System;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace BinarySearchTree
@@ -16,6 +20,7 @@ namespace BinarySearchTree
         /// </summary>
         public BST()
         {
+            this.Root = null;
         }
 
         /// <summary>
@@ -24,6 +29,7 @@ namespace BinarySearchTree
         /// <param name="newroot">The Node of the root.</param>
         public BST(Node newroot)
         {
+            this.Root = newroot;
         }
 
         /// <summary>
@@ -37,6 +43,11 @@ namespace BinarySearchTree
         /// <returns>the number of nodes in the BST.</returns>
         public int GetNodeCount()
         {
+            if (this.Root != null)
+            {
+                return this.Root.NodeCount ;
+            }
+
             return 0;
         }
 
@@ -46,7 +57,7 @@ namespace BinarySearchTree
         /// <returns>a string of the tree contents.</returns>
         public string TraverseInOrder()
         {
-            return null;
+            return this.TraversalHelper(this.Root, new StringBuilder()).ToString();
         }
 
         /// <summary>
@@ -55,7 +66,7 @@ namespace BinarySearchTree
         /// <returns>The number of levels in the tree.</returns>
         public int GetLevelCount()
         {
-            return 0;
+            return this.GetHeight(this.Root);
         }
 
         /// <summary>
@@ -64,25 +75,96 @@ namespace BinarySearchTree
         /// <returns>the minimum number of levels the BST could have.</returns>
         public int GetMinLevelCount()
         {
+            if (this.Root != null)
+            {
+                int nodecount = this.Root.NodeCount + 1;
+                return Convert.ToInt32(Math.Ceiling(Math.Log2(nodecount)));
+            }
+
             return 0;
         }
 
         /// <summary>
         /// Insert a node into the tree.
         /// </summary>
-        /// <param name="newnode">The node to be inserted.</param>
-        public void Insert(Node newnode)
+        /// <param name="value">The value of the node to be inserted.</param>
+        public void Insert(int value)
         {
+            if (this.Root == null)
+            {
+                this.Root = new Node(value);
+            }
+            else
+            {
+                this.InsertHelper(this.Root, value);
+            }
         }
 
         /// <summary>
-        /// recursive function to help build the in order traversal string.
+        /// Recursive helper function to create return print string
         /// </summary>
-        /// <param name="output">a string to be built on.</param>
-        /// <returns>the built string.</returns>
-        private string TraversalHelper(StringBuilder output)
+        /// <param name="pcur">current node.</param>
+        /// <param name="output">string to be built on.</param>
+        /// <returns>the built string of tree contents.</returns>
+        private StringBuilder TraversalHelper(Node pcur, StringBuilder output)
         {
-            return null;
+            if (pcur == null)
+            {
+                return output;
+            }
+
+            this.TraversalHelper(pcur.LeftNode, output);
+            output.Append(pcur.Data + " ");
+            this.TraversalHelper(pcur.RightNode, output);
+            return output;
+        }
+
+        /// <summary>
+        /// helper function for Insert().
+        /// </summary>
+        /// <param name="pcur">current node of the tree.</param>
+        /// <param name="value">Node to be inserted.</param>
+        private void InsertHelper(Node pcur, int value)
+        {
+            pcur.NodeCount++;
+            if (pcur.Data > value)
+            {
+                if (pcur.LeftNode == null)
+                {
+                    pcur.LeftNode = new Node(value);
+
+                }
+                else
+                {
+                    InsertHelper(pcur.LeftNode, value);
+                }
+            }
+            else
+            {
+                if (pcur.RightNode == null)
+                {
+                    pcur.RightNode = new Node(value);
+                }
+                else
+                {
+                    InsertHelper(pcur.RightNode, value);
+                }
+            }
+        }
+
+        /// <summary>
+        /// A function to get the height of a node.
+        /// </summary>
+        /// <param name="root">a node to measure height from.</param>
+        /// <returns>max height of given root.</returns>
+        private int GetHeight(Node root)
+        {
+            if (root == null)
+            {
+                return 0;
+            }
+
+            return Math.Max(this.GetHeight(root.LeftNode), this.GetHeight(root.RightNode)) + 1;
         }
     }
 }

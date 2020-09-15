@@ -15,6 +15,9 @@ namespace BinarySearchTree
         /// </summary>
         public Node()
         {
+            this.NodeCount = 0;
+            this.RightNode = null;
+            this.LeftNode = null;
         }
 
         /// <summary>
@@ -24,13 +27,16 @@ namespace BinarySearchTree
         /// <param name="data">integer input.</param>
         public Node(int data)
         {
+            this.NodeCount = 0;
             this.Data = data;
+            this.RightNode = null;
+            this.LeftNode = null;
         }
 
         /// <summary>
         /// gets or sets the nodeCount.
         /// </summary>
-        public static int NodeCount { get; set; }
+        public int NodeCount { get; set; }
 
         /// <summary>
         /// gets or sets the Left pointer.

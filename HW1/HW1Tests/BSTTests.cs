@@ -19,10 +19,10 @@ namespace BinarySearchTree
         public void NodeCreation()
         {
             Node newNode = new Node(3);
-            Assert.AreEqual(newNode.Data, 3);
+            Assert.AreEqual(3, newNode.Data);
 
             newNode.Data = 1;
-            Assert.AreEqual(newNode.Data, 1);
+            Assert.AreEqual(1, newNode.Data);
         }
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace BinarySearchTree
         public void EmptyBSTCreation()
         {
             BST tree = new BST();
-            Assert.AreEqual(tree.TraverseInOrder(), string.Empty);
+            Assert.AreEqual(string.Empty, tree.TraverseInOrder());
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace BinarySearchTree
         public void BSTCreationWithNode()
         {
             BST tree = new BST(new Node(5));
-            Assert.AreEqual(tree.TraverseInOrder(), "5");
+            Assert.AreEqual("5 ", tree.TraverseInOrder());
         }
 
         /// <summary>
@@ -52,8 +52,8 @@ namespace BinarySearchTree
         public void InsertToBST()
         {
             BST tree = new BST();
-            tree.Insert(new Node(10));
-            Assert.AreEqual(tree.TraverseInOrder(), "10");
+            tree.Insert(10);
+            Assert.AreEqual("10 ", tree.TraverseInOrder());
         }
 
         /// <summary>
@@ -63,14 +63,14 @@ namespace BinarySearchTree
         public void SortBST()
         {
             BST tree = new BST();
-            tree.Insert(new Node(10));
-            tree.Insert(new Node(8));
-            tree.Insert(new Node(6));
-            tree.Insert(new Node(4));
-            tree.Insert(new Node(2));
-            tree.Insert(new Node(0));
+            tree.Insert(10);
+            tree.Insert(8);
+            tree.Insert(6);
+            tree.Insert(4);
+            tree.Insert(2);
+            tree.Insert(0);
 
-            Assert.AreEqual(tree.TraverseInOrder(), "0 2 4 6 8 10");
+            Assert.AreEqual("0 2 4 6 8 10 ", tree.TraverseInOrder());
         }
 
         /// <summary>
@@ -80,14 +80,14 @@ namespace BinarySearchTree
         public void BSTNodeCount()
         {
             BST tree = new BST();
-            tree.Insert(new Node(10));
-            tree.Insert(new Node(8));
-            tree.Insert(new Node(6));
-            tree.Insert(new Node(4));
-            tree.Insert(new Node(2));
-            tree.Insert(new Node(0));
+            tree.Insert(10);
+            tree.Insert(8);
+            tree.Insert(6);
+            tree.Insert(4);
+            tree.Insert(2);
+            tree.Insert(0);
 
-            Assert.AreEqual(tree.GetNodeCount(), 5);
+            Assert.AreEqual(5, tree.GetNodeCount());
         }
 
         /// <summary>
@@ -97,14 +97,14 @@ namespace BinarySearchTree
         public void BSTMinLevelCount()
         {
             BST tree = new BST();
-            tree.Insert(new Node(10));
-            tree.Insert(new Node(8));
-            tree.Insert(new Node(6));
-            tree.Insert(new Node(4));
-            tree.Insert(new Node(2));
-            tree.Insert(new Node(0));
+            tree.Insert(10);
+            tree.Insert(8);
+            tree.Insert(6);
+            tree.Insert(4);
+            tree.Insert(2);
+            tree.Insert(0);
 
-            Assert.AreEqual(tree.GetMinLevelCount(), 3);
+            Assert.AreEqual(3, tree.GetMinLevelCount());
         }
 
         /// <summary>
@@ -114,13 +114,13 @@ namespace BinarySearchTree
         public void BSTLevelCount()
         {
             BST tree = new BST();
-            tree.Insert(new Node(5));
-            tree.Insert(new Node(6));
-            tree.Insert(new Node(4));
-            tree.Insert(new Node(2));
-            tree.Insert(new Node(1));
+            tree.Insert(5);
+            tree.Insert(6);
+            tree.Insert(4);
+            tree.Insert(2);
+            tree.Insert(1);
 
-            Assert.AreEqual(tree.GetLevelCount(), 4);
+            Assert.AreEqual(4, tree.GetLevelCount());
         }
     }
 }
