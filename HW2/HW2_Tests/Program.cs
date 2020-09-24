@@ -1,12 +1,25 @@
-﻿using System;
+﻿// <copyright file="Program.cs" company="Connor Easton (11557902)">
+// Copyright (c) Connor Easton (11557902). All rights reserved.
+// </copyright>
 
-namespace HW2_Tests
+using System;
+using NUnit.Framework;
+
+
+namespace HW2
 {
-    class Program
+    /// <summary>
+    /// Main Test program.
+    /// </summary>
+    [TestFixture]
+    public class HW2Tests
     {
-        static void Main(string[] args)
+        [Test]
+        public void CreateList()
         {
-            Console.WriteLine("Hello World!");
+            SortIntegers myInts = new SortIntegers();
+            Assert.AreEqual(10000, myInts.myList.Count);
         }
+
     }
 }
