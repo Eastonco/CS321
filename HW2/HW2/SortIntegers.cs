@@ -10,7 +10,12 @@ namespace HW2
     {
         public SortIntegers()
         {
-
+            this.myList = new List<int>();
+            var rand = new Random();
+            for (int i = 0; i < 10000; i++)
+            {
+                this.myList.Add(rand.Next(20000));
+            }
         }
 
         public List<int> myList;
