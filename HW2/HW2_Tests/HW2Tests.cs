@@ -37,5 +37,18 @@ namespace HW2
             distinct.Sort();
             Assert.AreEqual(distinct, Sorter.HashDistinct());
         }
+
+        /// <summary>
+        /// Distinct funciton with O(1) space complexity
+        /// </summary>
+        [Test]
+        public void SpaceDistinct()
+        {
+            SortIntegers Sorter = new SortIntegers();
+            var list = Sorter.GetList();
+            List<int> distinct = list.Distinct().ToList();
+            distinct.Sort();
+            Assert.AreEqual(distinct, Sorter.SpaceDistinct());
+        }
     }
 }

@@ -53,6 +53,11 @@ namespace HW2
             return distinct;
         }
 
+        public List<int> SpaceDistinct()
+        {
+            return new List<int>();
+        }
+
         /// <summary>
         /// Funciton to return the list.
         /// </summary>
