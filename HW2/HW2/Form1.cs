@@ -32,6 +32,5 @@ namespace HW2
 
             this.textBox1.Text = sb.ToString();
         }
-
     }
 }
