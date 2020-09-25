@@ -46,8 +46,19 @@ namespace HW2
             SortIntegers Sorter = new SortIntegers();
             var list = Sorter.GetList();
             List<int> distinct = list.Distinct().ToList();
-            int count = Sorter.SpaceDistinct();
-            Assert.AreEqual(distinct.Count(), count);
+            Assert.AreEqual(distinct.Count(), Sorter.SpaceDistinct());
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [Test]
+        public void SortDistinct()
+        {
+            SortIntegers Sorter = new SortIntegers();
+            var list = Sorter.GetList();
+            List<int> distinct = list.Distinct().ToList();
+            Assert.AreEqual(distinct.Count(), Sorter.SortDistinct());
         }
     }
 }

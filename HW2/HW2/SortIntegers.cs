@@ -83,6 +83,14 @@ namespace HW2
 
             return count;
         }
+        /// <summary>
+        /// Sorts the list first and runs in O(n) with O(1) space.
+        /// </summary>
+        /// <returns>count of distinct values.</returns>
+        public int SortDistinct()
+        {
+            return 0;
+        }
 
         /// <summary>
         /// Funciton to return the list.
@@ -93,6 +101,6 @@ namespace HW2
             return this.myList;
         }
 
-
     }
+
 }
