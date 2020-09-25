@@ -6,6 +6,8 @@ namespace HW2
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
+    using System.Windows.Forms;
 
     /// <summary>
     /// Class for main list calculations.
@@ -27,10 +29,30 @@ namespace HW2
             }
         }
 
+        /// <summary>
+        /// Distinct by hashtable.
+        /// </summary>
+        /// <returns>List of distinct elements.</returns>
         public List<int> HashDistinct()
         {
-            return new List<int>();
+            bool[] hashtable = new bool[20001];
+            List<int> distinct = new List<int>();
+            foreach (int element in this.myList)
+            {
+                hashtable[element] = true;
+            }
+
+            for (int i = 0; i < hashtable.Count(); i++)
+            {
+                if (hashtable[i])
+                {
+                    distinct.Add(i);
+                }
+            }
+
+            return distinct;
         }
+
         /// <summary>
         /// Funciton to return the list.
         /// </summary>
