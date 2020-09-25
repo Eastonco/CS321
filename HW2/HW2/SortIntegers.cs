@@ -33,10 +33,10 @@ namespace HW2
         /// Distinct by hashtable.
         /// </summary>
         /// <returns>List of distinct elements.</returns>
-        public List<int> HashDistinct()
+        public int HashDistinct()
         {
             bool[] hashtable = new bool[20001];
-            List<int> distinct = new List<int>();
+            int distinct = 0;
             foreach (int element in this.myList)
             {
                 hashtable[element] = true;
@@ -46,16 +46,42 @@ namespace HW2
             {
                 if (hashtable[i])
                 {
-                    distinct.Add(i);
+                    distinct++;
                 }
             }
 
             return distinct;
         }
 
-        public List<int> SpaceDistinct()
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>the list of distinct</returns>
+        public int SpaceDistinct()
         {
-            return new List<int>();
+            int count = 0;
+            bool lastOccurance = true;
+            for (int i = 0; i < this.myList.Count() - 1; i++)
+            {
+                lastOccurance = true;
+
+                for (int j = i + 1; j < this.myList.Count(); j++)
+                {
+                    if (this.myList[i] == this.myList[j])
+                    {
+                        lastOccurance = false;
+                    }
+                }
+
+                if (lastOccurance)
+                {
+                    count++;
+                }
+            }
+
+            count++;
+
+            return count;
         }
 
         /// <summary>
