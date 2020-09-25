@@ -1,13 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// <copyright file="SortIntegers.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace HW2
 {
+    using System;
+    using System.Collections.Generic;
+
+    /// <summary>
+    /// Class for main list calculations.
+    /// </summary>
     public class SortIntegers
     {
+        private readonly List<int> myList;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SortIntegers"/> class.
+        /// </summary>
         public SortIntegers()
         {
             this.myList = new List<int>();
@@ -18,7 +27,19 @@ namespace HW2
             }
         }
 
-        public List<int> myList;
+        public List<int> HashDistinct()
+        {
+            return new List<int>();
+        }
+        /// <summary>
+        /// Funciton to return the list.
+        /// </summary>
+        /// <returns>List of ints.</returns>
+        public List<int> GetList()
+        {
+            return this.myList;
+        }
+
 
     }
 }
