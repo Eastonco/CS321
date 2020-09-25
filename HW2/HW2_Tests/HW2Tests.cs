@@ -2,10 +2,9 @@
 // Copyright (c) Connor Easton (11557902). All rights reserved.
 // </copyright>
 
-using NUnit.Framework;
-using System.Collections.Immutable;
 using System.Collections.Generic;
 using System.Linq;
+using NUnit.Framework;
 
 namespace HW2
 {
@@ -26,39 +25,39 @@ namespace HW2
         }
 
         /// <summary>
-        /// Tests the first sort method
+        /// Tests the first sort method.
         /// </summary>
         [Test]
         public void HashDistinct()
         {
-            SortIntegers Sorter = new SortIntegers();
-            var list = Sorter.GetList();
+            SortIntegers sorter = new SortIntegers();
+            var list = sorter.GetList();
             List<int> distinct = list.Distinct().ToList();
-            Assert.AreEqual(distinct.Count(), Sorter.HashDistinct());
+            Assert.AreEqual(distinct.Count(), sorter.HashDistinct());
         }
 
         /// <summary>
-        /// Distinct funciton with O(1) space complexity
+        /// Distinct funciton with O(1) space complexity.
         /// </summary>
         [Test]
         public void SpaceDistinct()
         {
-            SortIntegers Sorter = new SortIntegers();
-            var list = Sorter.GetList();
+            SortIntegers sorter = new SortIntegers();
+            var list = sorter.GetList();
             List<int> distinct = list.Distinct().ToList();
-            Assert.AreEqual(distinct.Count(), Sorter.SpaceDistinct());
+            Assert.AreEqual(distinct.Count(), sorter.SpaceDistinct());
         }
 
         /// <summary>
-        /// 
+        /// Test case for the distinct by sort functon.
         /// </summary>
         [Test]
         public void SortDistinct()
         {
-            SortIntegers Sorter = new SortIntegers();
-            var list = Sorter.GetList();
+            SortIntegers sorter = new SortIntegers();
+            var list = sorter.GetList();
             List<int> distinct = list.Distinct().ToList();
-            Assert.AreEqual(distinct.Count(), Sorter.SortDistinct());
+            Assert.AreEqual(distinct.Count(), sorter.SortDistinct());
         }
     }
 }

@@ -54,9 +54,9 @@ namespace HW2
         }
 
         /// <summary>
-        /// 
+        /// Function for calculating the distinct count with constant space complexity.
         /// </summary>
-        /// <returns>the list of distinct</returns>
+        /// <returns>the list of distinct.</returns>
         public int SpaceDistinct()
         {
             int count = 0;
@@ -83,13 +83,24 @@ namespace HW2
 
             return count;
         }
+
         /// <summary>
         /// Sorts the list first and runs in O(n) with O(1) space.
         /// </summary>
         /// <returns>count of distinct values.</returns>
         public int SortDistinct()
         {
-            return 0;
+            int count = 0;
+            this.myList.Sort();
+            for (int i = 0; i < this.myList.Count() - 1; i++)
+            {
+                if (this.myList[i] != this.myList[i + 1])
+                {
+                    count++;
+                }
+            }
+
+            return ++count;
         }
 
         /// <summary>
@@ -100,7 +111,5 @@ namespace HW2
         {
             return this.myList;
         }
-
     }
-
 }
