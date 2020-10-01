@@ -103,7 +103,6 @@ namespace HW2
             return ++count;
         }
 
-
         /// <summary>
         /// Funciton to return the list.
         /// </summary>
