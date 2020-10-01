@@ -56,7 +56,7 @@
             this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 40);
+            this.menuStrip1.Size = new System.Drawing.Size(800, 42);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -69,7 +69,7 @@
             this.toolStripSeparator1,
             this.saveToFileToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(242, 38);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(72, 38);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // loadFromFileToolStripMenuItem
@@ -77,13 +77,14 @@
             this.loadFromFileToolStripMenuItem.Name = "loadFromFileToolStripMenuItem";
             this.loadFromFileToolStripMenuItem.Size = new System.Drawing.Size(523, 44);
             this.loadFromFileToolStripMenuItem.Text = "Load From File...";
+            this.loadFromFileToolStripMenuItem.Click += new System.EventHandler(this.LoadFromFileToolStripMenuItem_Click);
             // 
             // loadFibonacciNumbersFirst50ToolStripMenuItem
             // 
             this.loadFibonacciNumbersFirst50ToolStripMenuItem.Name = "loadFibonacciNumbersFirst50ToolStripMenuItem";
             this.loadFibonacciNumbersFirst50ToolStripMenuItem.Size = new System.Drawing.Size(523, 44);
             this.loadFibonacciNumbersFirst50ToolStripMenuItem.Text = "Load Fibonacci Numbers (First 50)";
-            this.loadFibonacciNumbersFirst50ToolStripMenuItem.Click += new System.EventHandler(this.loadFibonacciNumbersFirst50ToolStripMenuItem_Click);
+            this.loadFibonacciNumbersFirst50ToolStripMenuItem.Click += new System.EventHandler(this.LoadFibonacciNumbersFirst50ToolStripMenuItem_Click);
             // 
             // loadFibonacciNumbersFirst100ToolStripMenuItem
             // 
@@ -101,6 +102,7 @@
             this.saveToFileToolStripMenuItem.Name = "saveToFileToolStripMenuItem";
             this.saveToFileToolStripMenuItem.Size = new System.Drawing.Size(523, 44);
             this.saveToFileToolStripMenuItem.Text = "Save to file...";
+            this.saveToFileToolStripMenuItem.Click += new System.EventHandler(this.SaveToFileToolStripMenuItem_Click);
             // 
             // Form1
             // 
