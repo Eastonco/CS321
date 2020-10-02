@@ -69,7 +69,12 @@ namespace HW3
 
         public override string ReadToEnd()
         {
-            return null;
+            StringWriter sr = new StringWriter();
+            while (this.Current <= this.EntryCount)
+            {
+                sr.Write(this.ReadLine());
+            }
+            return sr.ToString();
         }
     }
 }
