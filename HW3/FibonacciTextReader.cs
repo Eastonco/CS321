@@ -47,13 +47,22 @@ namespace HW3
             }
         }
 
-
         /// <summary>
-        /// 
+        /// Overridden readline function.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>the output string.</returns>
         public override string ReadLine()
         {
+            if (this.Current <= this.EntryCount)
+            {
+                StringWriter sr = new StringWriter();
+                sr.Write(this.Current);
+                sr.Write(": ");
+                sr.Write(this.GetFibAt(this.Current - 1));
+                this.Current++;
+
+                return sr.ToString();
+            }
 
             return null;
         }
