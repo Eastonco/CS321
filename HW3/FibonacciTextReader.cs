@@ -66,5 +66,10 @@ namespace HW3
 
             return null;
         }
+
+        public override string ReadToEnd()
+        {
+            return null;
+        }
     }
 }
