@@ -4,13 +4,8 @@
 
 namespace HW3
 {
-    using System;
-    using System.Collections.Generic;
     using System.IO;
-    using System.Linq;
     using System.Numerics;
-    using System.Text;
-    using System.Threading.Tasks;
 
     /// <summary>
     /// Class for generating fib numbers.
@@ -58,8 +53,8 @@ namespace HW3
                 StringWriter sr = new StringWriter();
                 sr.Write(this.Current);
                 sr.Write(": ");
-                sr.Write(this.GetFibAt(this.Current - 1));
-                this.Current++;
+                sr.WriteLine(this.GetFibAt(this.Current - 1));
+                this.Current += 1;
 
                 return sr.ToString();
             }
@@ -87,16 +82,20 @@ namespace HW3
         /// </summary>
         /// <param name="val">location of fib number.</param>
         /// <returns>the fib number at locaiton.</returns>
-        private BigInteger GetFibAt(BigInteger val)
+        private BigInteger GetFibAt(int val)
         {
-            if (val <= 1)
+            BigInteger[] fibs = new BigInteger[val + 2];
+            int i;
+
+            fibs[0] = 0;
+            fibs[1] = 1;
+
+            for (i = 2; i <= val; i++)
             {
-                return val;
+                fibs[i] = fibs[i - 1] + fibs[i - 2];
             }
-            else
-            {
-                return this.GetFibAt(val - 1) + this.GetFibAt(val - 2);
-            }
+
+            return fibs[val];
         }
     }
 }

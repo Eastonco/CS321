@@ -15,7 +15,7 @@ namespace HW3
     public partial class Form1 : Form
     {
         /// <summary>
-        /// default constructor.
+        /// Initializes a new instance of the <see cref="Form1"/> class.
         /// </summary>
         public Form1()
         {
@@ -24,12 +24,8 @@ namespace HW3
 
         private void LoadFibonacciNumbersFirst50ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
+            FibonacciTextReader fib = new FibonacciTextReader(50);
+            this.textBox1.Text = fib.ReadToEnd();
         }
 
         private void LoadText(TextReader sr)
@@ -75,6 +71,12 @@ namespace HW3
             {
                 this.LoadTextfromFile(openFileDialog1.FileName);
             }
+        }
+
+        private void LoadFibonacciNumbersFirst100ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FibonacciTextReader fib = new FibonacciTextReader(100);
+            this.textBox1.Text = fib.ReadToEnd();
         }
     }
 }
