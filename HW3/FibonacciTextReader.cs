@@ -22,7 +22,7 @@ namespace HW3
         /// <param name="EntryCount"></param>
         public FibonacciTextReader(int EntryCount)
         {
-
+            this.EntryCount = EntryCount;
         }
 
         /// <summary>
