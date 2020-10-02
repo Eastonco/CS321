@@ -3,6 +3,7 @@
 // </copyright>
 
 using System;
+using HW3;
 using NUnit.Framework;
 
 namespace HW3_Tests
@@ -17,8 +18,10 @@ namespace HW3_Tests
         /// A sample test.
         /// </summary>
         [Test]
-        public void SampleTest()
+        public void FibonacciConstructor()
         {
+            FibonacciTextReader reader = new FibonacciTextReader(50);
+            Assert.AreEqual(50, reader.EntryCount);
         }
     }
 }
