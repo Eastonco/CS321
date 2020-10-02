@@ -1,21 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿// <copyright file="Form1.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace HW3
 {
+    using System;
+    using System.IO;
+    using System.Text;
+    using System.Windows.Forms;
+
+    /// <summary>
+    /// Main application.
+    /// </summary>
     public partial class Form1 : Form
     {
+        /// <summary>
+        /// default constructor.
+        /// </summary>
         public Form1()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         private void LoadFibonacciNumbersFirst50ToolStripMenuItem_Click(object sender, EventArgs e)

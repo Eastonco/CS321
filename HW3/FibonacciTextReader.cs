@@ -21,30 +21,30 @@ namespace HW3
         /// Initializes a new instance of the <see cref="FibonacciTextReader"/> class.
         /// default constructor.
         /// </summary>
-        /// <param name="EntryCount"></param>
-        public FibonacciTextReader(int EntryCount)
+        /// <param name="entryCount">max number of fibs to print.</param>
+        public FibonacciTextReader(int entryCount)
         {
-            this.EntryCount = EntryCount;
+            this.EntryCount = entryCount;
             this.Current = 1;
         }
 
         /// <summary>
-        /// keeps track of how many lines to print.
+        /// Gets or sets keeps track of how many lines to print.
         /// </summary>
-        public int EntryCount;
-        public int Current;
+        private int EntryCount { get; set; }
 
+        /// <summary>
+        /// Gets or sets keeps track of how many fibs have been printed.
+        /// </summary>
+        private int Current { get; set; }
 
-        private BigInteger GetFibAt(BigInteger val)
+        /// <summary>
+        /// Used for tests.
+        /// </summary>
+        /// <returns>the private entry count variable.</returns>
+        public int GetEntryCount()
         {
-            if ( val <= 1)
-            {
-                return val;
-            }
-            else
-            {
-                return this.GetFibAt(val - 1) + this.GetFibAt(val - 2);
-            }
+            return this.EntryCount;
         }
 
         /// <summary>
@@ -67,6 +67,10 @@ namespace HW3
             return null;
         }
 
+        /// <summary>
+        /// Overridden read to end function.
+        /// </summary>
+        /// <returns>the string of all lines until the end.</returns>
         public override string ReadToEnd()
         {
             StringWriter sr = new StringWriter();
@@ -74,7 +78,25 @@ namespace HW3
             {
                 sr.Write(this.ReadLine());
             }
+
             return sr.ToString();
+        }
+
+        /// <summary>
+        /// gets the fib number at location.
+        /// </summary>
+        /// <param name="val">location of fib number.</param>
+        /// <returns>the fib number at locaiton.</returns>
+        private BigInteger GetFibAt(BigInteger val)
+        {
+            if (val <= 1)
+            {
+                return val;
+            }
+            else
+            {
+                return this.GetFibAt(val - 1) + this.GetFibAt(val - 2);
+            }
         }
     }
 }

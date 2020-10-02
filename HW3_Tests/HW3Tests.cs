@@ -15,24 +15,30 @@ namespace HW3_Tests
     public class HW3Tests
     {
         /// <summary>
-        /// A sample test.
+        /// tests the constructor.
         /// </summary>
         [Test]
         public void FibonacciConstructor()
         {
             FibonacciTextReader reader = new FibonacciTextReader(50);
-            Assert.AreEqual(50, reader.EntryCount);
+            Assert.AreEqual(50, reader.GetEntryCount());
         }
 
+        /// <summary>
+        /// tests the readLine funciton.
+        /// </summary>
         [Test]
-        public void getFibAt()
+        public void GetFibAt()
         {
             FibonacciTextReader reader = new FibonacciTextReader(50);
             Assert.AreEqual("1: 0", reader.ReadLine());
         }
 
+        /// <summary>
+        /// test the ReadToEnd() funciton.
+        /// </summary>
         [Test]
-        public void readToEnd()
+        public void ReadToEnd()
         {
             FibonacciTextReader reader = new FibonacciTextReader(1);
             Assert.AreEqual("1: 0", reader.ReadToEnd());
