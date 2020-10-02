@@ -23,5 +23,12 @@ namespace HW3_Tests
             FibonacciTextReader reader = new FibonacciTextReader(50);
             Assert.AreEqual(50, reader.EntryCount);
         }
+
+        [Test]
+        public void getFibAt()
+        {
+            FibonacciTextReader reader = new FibonacciTextReader(50);
+            Assert.AreEqual("1: 0", reader.ReadLine());
+        }
     }
 }

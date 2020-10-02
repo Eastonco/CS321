@@ -6,7 +6,9 @@ namespace HW3
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
+    using System.Numerics;
     using System.Text;
     using System.Threading.Tasks;
 
@@ -23,12 +25,28 @@ namespace HW3
         public FibonacciTextReader(int EntryCount)
         {
             this.EntryCount = EntryCount;
+            this.Current = 1;
         }
 
         /// <summary>
         /// keeps track of how many lines to print.
         /// </summary>
-        public int EntryCount { get; }
+        public int EntryCount;
+        public int Current;
+
+
+        private BigInteger GetFibAt(BigInteger val)
+        {
+            if ( val <= 1)
+            {
+                return val;
+            }
+            else
+            {
+                return this.GetFibAt(val - 1) + this.GetFibAt(val - 2);
+            }
+        }
+
 
         /// <summary>
         /// 
@@ -36,7 +54,8 @@ namespace HW3
         /// <returns></returns>
         public override string ReadLine()
         {
-            return base.ReadLine();
+
+            return null;
         }
     }
 }
