@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.30503.244
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spreadsheet_Connor_Easton", "Spreadsheet_Connor_Easton.csproj", "{0D8CE786-23FC-436B-9252-A896184BB01B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpreadsheetEngine", "..\SpreadsheetEngine\SpreadsheetEngine.csproj", "{E17CAB68-B211-441D-931E-EEF56C010666}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpreadsheetEngine", "..\SpreadsheetEngine\SpreadsheetEngine.csproj", "{E17CAB68-B211-441D-931E-EEF56C010666}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpreadsheetEngineTests", "..\SpreadsheetEngineTests\SpreadsheetEngineTests.csproj", "{65F5D85E-72A4-4127-B783-74602C9922CF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{E17CAB68-B211-441D-931E-EEF56C010666}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E17CAB68-B211-441D-931E-EEF56C010666}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E17CAB68-B211-441D-931E-EEF56C010666}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65F5D85E-72A4-4127-B783-74602C9922CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65F5D85E-72A4-4127-B783-74602C9922CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65F5D85E-72A4-4127-B783-74602C9922CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65F5D85E-72A4-4127-B783-74602C9922CF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
