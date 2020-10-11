@@ -1,62 +1,109 @@
-﻿using System;
+﻿// <copyright file="SpreadsheetCell.cs" company="Connor Easton (11557902)">
+// Copyright (c) Connor Easton (11557902). All rights reserved.
+// </copyright>
+
+using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-
 namespace SpreadsheetEngine
 {
+    /// <summary>
+    /// main cell class.
+    /// </summary>
     public abstract class SpreadsheetCell : INotifyPropertyChanged
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SpreadsheetCell"/> class.
+        /// </summary>
+        /// <param name="row">row.</param>
+        /// <param name="column">column.</param>
         public SpreadsheetCell(int row, int column)
         {
-            this.rowIndex = row;
+            this.RowIndex = row;
             this.ColumnIndex = column;
-            this._text = string.Empty;
+            this.Text = string.Empty;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+        /// <summary>
+        /// Update property changed.
+        /// </summary>
+        /// <param name="propertyName">property name.</param>
+        protected void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
-            PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            if (this._text.StartsWith("="))
+            {
+                this._value = this.Evaluate(this.Text.Substring(1));
+            }
+            else
+            {
+                this._value = this._text;
+            }
+
         }
-        public int rowIndex { get; }
+
+        /// <summary>
+        /// row index.
+        /// </summary>
+        public int RowIndex { get; }
+
+        /// <summary>
+        /// column index.
+        /// </summary>
         public int ColumnIndex { get; }
+
+        /// <summary>
+        /// private value.
+        /// </summary>
+        protected string _value;
+
+        /// <summary>
+        /// private text.
+        /// </summary>
         protected string _text;
+
+        /// <summary>
+        /// Text.
+        /// </summary>
         public string Text {
             get
             {
                 return this._text;
             }
+
             set
             {
-                if(value == this._text)
+                if (value == this._text)
                 {
                     return;
                 }
                 else
                 {
                     this._text = value;
-                    NotifyPropertyChanged();
+                    this.NotifyPropertyChanged();
                 }
             }
         }
-        public string Value
+        /// <summary>
+        /// Value.
+        /// </summary>
+        public virtual string Value
         {
             get
             {
-                if (this.Text.StartsWith("="))
-                {
-                    return this.Evaluate(this.Text.Substring(1));
-                }
-                else
-                {
-                    return this.Text;
-                }
+                return this._value;
+            }
+
+            set
+            {
+                return;
             }
         }
 
-        abstract public string Evaluate(string input);
+        public abstract string Evaluate(string input);
 
     }
 }

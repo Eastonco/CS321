@@ -1,59 +1,92 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿// <copyright file="Form1.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace Spreadsheet_Connor_Easton
 {
+    using System;
+    using System.ComponentModel;
+    using System.Windows.Forms;
+    using SpreadsheetEngine;
+
+    /// <summary>
+    /// Base form.
+    /// </summary>
     public partial class Form1 : Form
     {
+        /// <summary>
+        /// main engine.
+        /// </summary>
+        private readonly SpreadsheetEngine.Spreadsheet engine;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Form1"/> class.
+        /// </summary>
         public Form1()
         {
-            InitializeComponent();
-            Engine = new SpreadsheetEngine.Spreadsheet(50, 26);
+            this.InitializeComponent();
+            this.engine = new SpreadsheetEngine.Spreadsheet(50, 26);
         }
-
-        public SpreadsheetEngine.Spreadsheet Engine;
-
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            dataGridView1.CancelEdit();
-            dataGridView1.Columns.Clear();
+            this.dataGridView1.CancelEdit();
+            this.dataGridView1.Columns.Clear();
 
             for (char column = 'A'; column <= 'Z'; column++)
             {
-                dataGridView1.Columns.Add("Column " + column, column.ToString());
+                this.dataGridView1.Columns.Add("Column " + column, column.ToString());
             }
-            dataGridView1.Rows.Add(50);
+
+            this.dataGridView1.Rows.Add(50);
+
             for (int row = 1; row <= 50; row++)
             {
-                dataGridView1.Rows[row - 1].HeaderCell.Value = row.ToString();
+                this.dataGridView1.Rows[row - 1].HeaderCell.Value = row.ToString();
             }
 
-            for (int i = 0; i < 49; i++)
+            this.engine.CellPropertyChanged += this.SpreadsheetChangedEvent;
+        }
+
+        private void SpreadsheetChangedEvent(object sender, PropertyChangedEventArgs e)
+        {
+            SpreadsheetCell cell = (SpreadsheetCell)sender;
+            this.dataGridView1[cell.ColumnIndex, cell.RowIndex].Value = this.engine.sheet[cell.RowIndex, cell.ColumnIndex].Value;
+        }
+
+        private void DataGridView1_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            this.dataGridView1[e.ColumnIndex, e.RowIndex].Value = this.engine.sheet[e.RowIndex, e.ColumnIndex].Text;
+        }
+
+        private void DataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            this.engine.sheet[e.RowIndex, e.ColumnIndex].Text = this.dataGridView1[e.ColumnIndex, e.RowIndex].Value?.ToString() ?? string.Empty;
+            this.dataGridView1[e.ColumnIndex, e.RowIndex].Value = this.engine.sheet[e.RowIndex, e.ColumnIndex].Value;
+        }
+
+        private void DemoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var rand = new Random();
+
+            for (int i = 0; i < 50; i++)
             {
-                for(int j = 0; j < 25; j++)
+                this.engine.sheet[rand.Next(49), rand.Next(25)].Text = "Hello world!";
+            }
+
+            for (int i = 1; i < 50; i++)
+            {
+                this.engine.sheet[i - 1, 1].Text = "This is cell B" + i;
+                this.engine.sheet[i - 1, 0].Text = "=B" + i;
+            }
+
+            for (int i = 0; i < 50; i++)
+            {
+                for (int j = 0; j < 26; j++)
                 {
-                    Engine.sheet[i, j].PropertyChanged += (Cellsender, CellE) => dataGridView1[j, i].Value = ((SpreadsheetEngine.SpreadsheetCell)Cellsender).Value;
+                    this.dataGridView1[j, i].Value = this.engine.sheet[i, j].Value;
                 }
             }
-        }
-
-        private void dataGridView1_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
-        {
-            this.dataGridView1[e.ColumnIndex, e.RowIndex].Value = Engine.sheet[e.RowIndex, e.ColumnIndex].Text;
-        }
-
-        private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
-        {
-            Engine.sheet[e.RowIndex, e.ColumnIndex].Text = dataGridView1[e.ColumnIndex, e.RowIndex].Value?.ToString() ?? string.Empty;
-            dataGridView1[e.ColumnIndex, e.RowIndex].Value = Engine.sheet[e.RowIndex, e.ColumnIndex].Value;
         }
     }
 }
