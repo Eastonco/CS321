@@ -7,7 +7,7 @@ namespace Spreadsheet_Connor_Easton
     using System;
     using System.ComponentModel;
     using System.Windows.Forms;
-    using SpreadsheetEngine;
+    using Cpts321;
 
     /// <summary>
     /// Base form.
@@ -17,7 +17,7 @@ namespace Spreadsheet_Connor_Easton
         /// <summary>
         /// main engine.
         /// </summary>
-        private readonly SpreadsheetEngine.Spreadsheet engine;
+        private readonly Cpts321.Spreadsheet engine;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Form1"/> class.
@@ -25,7 +25,7 @@ namespace Spreadsheet_Connor_Easton
         public Form1()
         {
             this.InitializeComponent();
-            this.engine = new SpreadsheetEngine.Spreadsheet(50, 26);
+            this.engine = new Cpts321.Spreadsheet(50, 26);
         }
 
         private void Form1_Load(object sender, EventArgs e)
