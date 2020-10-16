@@ -1,8 +1,8 @@
 ﻿using System;
 using NUnit.Framework;
-using SpreadsheetEngine;
+using Cpts321;
 
-namespace SpreadsheetEngine.Tests
+namespace Cpts321.Tests
 {
 
     [TestFixture]
