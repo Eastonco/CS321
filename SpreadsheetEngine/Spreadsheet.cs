@@ -4,7 +4,7 @@
 
 using System.ComponentModel;
 
-namespace SpreadsheetEngine
+namespace Cpts321
 {
     /// <summary>
     /// main spreadsheet class.

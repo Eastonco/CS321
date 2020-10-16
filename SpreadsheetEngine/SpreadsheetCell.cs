@@ -6,7 +6,7 @@ using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace SpreadsheetEngine
+namespace Cpts321
 {
     /// <summary>
     /// main cell class.
