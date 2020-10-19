@@ -1,21 +1,21 @@
-﻿using System;
+﻿// <copyright file="SpreadsheetEngineTests.cs" company="Connor Easton (11557902)">
+// Copyright (c) Connor Easton (11557902). All rights reserved.
+// </copyright>
+
 using NUnit.Framework;
-using Cpts321;
 
 namespace Cpts321.Tests
 {
-
-    [TestFixture]
     /// <summary>
     /// Main test class.
     /// </summary>
+    [TestFixture]
     internal class SpreadsheetEngineTests
     {
-
-        [Test]
         /// <summary>
         /// testing cell update.
         /// </summary>
+        [Test]
         public void SpreadsheetCellUpdate()
         {
             var sheet = new Spreadsheet(1, 1);
@@ -25,11 +25,10 @@ namespace Cpts321.Tests
             Assert.AreEqual("Hello", cell1.Text);
         }
 
-
-        [Test]
         /// <summary>
         /// testing refrence cell update.
         /// </summary>
+        [Test]
         public void SpreadsheetCellRefrenceUpdate()
         {
             var sheet = new Spreadsheet(1, 2);

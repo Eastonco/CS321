@@ -25,6 +25,9 @@ namespace Cpts321
             this.Text = string.Empty;
         }
 
+        /// <summary>
+        /// property changed event.
+        /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
@@ -42,11 +45,10 @@ namespace Cpts321
             {
                 this._value = this._text;
             }
-
         }
 
         /// <summary>
-        /// row index.
+        /// Gets row index.
         /// </summary>
         public int RowIndex { get; }
 
@@ -87,6 +89,7 @@ namespace Cpts321
                 }
             }
         }
+
         /// <summary>
         /// Value.
         /// </summary>

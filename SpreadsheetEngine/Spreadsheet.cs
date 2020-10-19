@@ -18,7 +18,7 @@ namespace Cpts321
         /// <param name="columns">column index.</param>
         public Spreadsheet(int rows, int columns)
         {
-            this.sheet = new SpreadsheetCell[rows, columns];
+            this.Sheet = new SpreadsheetCell[rows, columns];
             this.ColumnCount = columns;
             this.RowCount = rows;
 
@@ -26,8 +26,8 @@ namespace Cpts321
             {
                 for (int j = 0; j < columns; j++)
                 {
-                    this.sheet[i, j] = new RefrenceCell(i, j, this);
-                    this.sheet[i, j].PropertyChanged += this.PropertyCellChanged;
+                    this.Sheet[i, j] = new RefrenceCell(i, j, this);
+                    this.Sheet[i, j].PropertyChanged += this.PropertyCellChanged;
                 }
             }
         }
@@ -61,13 +61,13 @@ namespace Cpts321
             public RefrenceCell(int row, int column, Spreadsheet parent)
                 : base(row, column)
             {
-                this.ParentSpreadsheet = parent;
+                this.parentSpreadsheet = parent;
             }
 
             /// <summary>
             /// parent spreadsheet.
             /// </summary>
-            private Spreadsheet ParentSpreadsheet;
+            private Spreadsheet parentSpreadsheet;
 
             /// <summary>
             /// evalue the cell.
@@ -76,7 +76,7 @@ namespace Cpts321
             /// <returns>the value.</returns>
             public override string Evaluate(string input)
             {
-                var target = this.ParentSpreadsheet.GetCell(input);
+                var target = this.parentSpreadsheet.GetCell(input);
 
                 target.PropertyChanged += (sender, e) => this.NotifyPropertyChanged(nameof(this.Value));
                 target.PropertyChanged += this.RefrencePropertyChanged;
@@ -97,11 +97,11 @@ namespace Cpts321
             private void RefrencePropertyChanged(object sender, PropertyChangedEventArgs e)
             {
                 SpreadsheetCell cell = (SpreadsheetCell)sender;
-                this.Value = this.ParentSpreadsheet.GetCell(cell.RowIndex, cell.ColumnIndex).Value;
+                this.Value = this.parentSpreadsheet.GetCell(cell.RowIndex, cell.ColumnIndex).Value;
             }
 
             /// <summary>
-            /// value override.
+            /// Gets or sets value override.
             /// </summary>
             public override string Value
             {
@@ -127,7 +127,7 @@ namespace Cpts321
         /// <summary>
         /// sheet.
         /// </summary>
-        public SpreadsheetCell[,] sheet;
+        public SpreadsheetCell[,] Sheet;
 
         /// <summary>
         /// Gets column count.
@@ -150,7 +150,7 @@ namespace Cpts321
             int columnNum = column - 'A' + 1;
             var row = int.Parse(location.Substring(1));
 
-            return this.sheet[row-1, columnNum-1];
+            return this.Sheet[row - 1, columnNum - 1];
         }
 
         /// <summary>
@@ -161,7 +161,7 @@ namespace Cpts321
         /// <returns>the cell.</returns>
         public SpreadsheetCell GetCell(int row, int column)
         {
-            return this.sheet[row, column];
+            return this.Sheet[row, column];
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿// <copyright file="MultiplyOperatorNode.cs" company="Connor Easton (11557902)">
+﻿// <copyright file="MinusOperatorNode.cs" company="Connor Easton (11557902)">
 // Copyright (c) Connor Easton (11557902). All rights reserved.
 // </copyright>
 
@@ -35,7 +35,7 @@ namespace ExpressionTree
         /// <returns>Evaluated value of left * right nodes.</returns>
         public override double Evaluate()
         {
-            return this.Left.Evaluate() * this.Right.Evaluate();
+            return this.Left.Evaluate() - this.Right.Evaluate();
         }
     }
 }

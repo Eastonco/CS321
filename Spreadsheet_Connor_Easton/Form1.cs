@@ -51,18 +51,18 @@ namespace Spreadsheet_Connor_Easton
         private void SpreadsheetChangedEvent(object sender, PropertyChangedEventArgs e)
         {
             SpreadsheetCell cell = (SpreadsheetCell)sender;
-            this.dataGridView1[cell.ColumnIndex, cell.RowIndex].Value = this.engine.sheet[cell.RowIndex, cell.ColumnIndex].Value;
+            this.dataGridView1[cell.ColumnIndex, cell.RowIndex].Value = this.engine.Sheet[cell.RowIndex, cell.ColumnIndex].Value;
         }
 
         private void DataGridView1_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
-            this.dataGridView1[e.ColumnIndex, e.RowIndex].Value = this.engine.sheet[e.RowIndex, e.ColumnIndex].Text;
+            this.dataGridView1[e.ColumnIndex, e.RowIndex].Value = this.engine.Sheet[e.RowIndex, e.ColumnIndex].Text;
         }
 
         private void DataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            this.engine.sheet[e.RowIndex, e.ColumnIndex].Text = this.dataGridView1[e.ColumnIndex, e.RowIndex].Value?.ToString() ?? string.Empty;
-            this.dataGridView1[e.ColumnIndex, e.RowIndex].Value = this.engine.sheet[e.RowIndex, e.ColumnIndex].Value;
+            this.engine.Sheet[e.RowIndex, e.ColumnIndex].Text = this.dataGridView1[e.ColumnIndex, e.RowIndex].Value?.ToString() ?? string.Empty;
+            this.dataGridView1[e.ColumnIndex, e.RowIndex].Value = this.engine.Sheet[e.RowIndex, e.ColumnIndex].Value;
         }
 
         private void DemoToolStripMenuItem_Click(object sender, EventArgs e)
@@ -71,20 +71,20 @@ namespace Spreadsheet_Connor_Easton
 
             for (int i = 0; i < 50; i++)
             {
-                this.engine.sheet[rand.Next(49), rand.Next(25)].Text = "Hello world!";
+                this.engine.Sheet[rand.Next(49), rand.Next(25)].Text = "Hello world!";
             }
 
             for (int i = 1; i < 50; i++)
             {
-                this.engine.sheet[i - 1, 1].Text = "This is cell B" + i;
-                this.engine.sheet[i - 1, 0].Text = "=B" + i;
+                this.engine.Sheet[i - 1, 1].Text = "This is cell B" + i;
+                this.engine.Sheet[i - 1, 0].Text = "=B" + i;
             }
 
             for (int i = 0; i < 50; i++)
             {
                 for (int j = 0; j < 26; j++)
                 {
-                    this.dataGridView1[j, i].Value = this.engine.sheet[i, j].Value;
+                    this.dataGridView1[j, i].Value = this.engine.Sheet[i, j].Value;
                 }
             }
         }
