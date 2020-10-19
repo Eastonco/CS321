@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpreadsheetEngine", "..\Spr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpreadsheetEngineTests", "..\SpreadsheetEngineTests\SpreadsheetEngineTests.csproj", "{65F5D85E-72A4-4127-B783-74602C9922CF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpressionTree", "..\ExpressionTree\ExpressionTree.csproj", "{26999C53-3C96-46C6-879E-5B8593F2EC30}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpressionTreeExample", "..\ExpressionTreeExample\ExpressionTreeExample.csproj", "{81DA679B-BF9D-4F98-9FA0-1E8BBAABC968}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{65F5D85E-72A4-4127-B783-74602C9922CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{65F5D85E-72A4-4127-B783-74602C9922CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{65F5D85E-72A4-4127-B783-74602C9922CF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{26999C53-3C96-46C6-879E-5B8593F2EC30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{26999C53-3C96-46C6-879E-5B8593F2EC30}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{26999C53-3C96-46C6-879E-5B8593F2EC30}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{26999C53-3C96-46C6-879E-5B8593F2EC30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81DA679B-BF9D-4F98-9FA0-1E8BBAABC968}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81DA679B-BF9D-4F98-9FA0-1E8BBAABC968}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81DA679B-BF9D-4F98-9FA0-1E8BBAABC968}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81DA679B-BF9D-4F98-9FA0-1E8BBAABC968}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

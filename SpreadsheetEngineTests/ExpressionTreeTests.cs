@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using NUnit.Framework;
 
-namespace SpreadsheetEngineTests
+namespace Cpts321.Tests
 {
     [TestFixture]
     class ExpressionTreeTests
