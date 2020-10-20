@@ -183,13 +183,7 @@ namespace Cpts321
         /// <returns>true or false.</returns>
         private bool IsRightAssociative(char c)
         {
-            int associativity = this.operatorNodeFactory.GetAssociativity(c);
-            if (associativity == 1)
-            {
-                return true;
-            }
-
-            return false;
+            return this.operatorNodeFactory.GetAssociativity(c) == OperatorNode.Associative.Right;
         }
 
         /// <summary>
@@ -199,13 +193,7 @@ namespace Cpts321
         /// <returns>true or false.</returns>
         private bool IsLeftAssociative(char c)
         {
-            int associativity = this.operatorNodeFactory.GetAssociativity(c);
-            if (associativity == -1)
-            {
-                return true;
-            }
-
-            return false;
+            return this.operatorNodeFactory.GetAssociativity(c) == OperatorNode.Associative.Left;
         }
 
         /// <summary>

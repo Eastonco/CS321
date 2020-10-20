@@ -53,7 +53,7 @@ namespace Cpts321
         public int RowIndex { get; }
 
         /// <summary>
-        /// column index.
+        /// Gets column index.
         /// </summary>
         public int ColumnIndex { get; }
 
@@ -70,7 +70,8 @@ namespace Cpts321
         /// <summary>
         /// Text.
         /// </summary>
-        public string Text {
+        public string Text
+        {
             get
             {
                 return this._text;
@@ -107,6 +108,5 @@ namespace Cpts321
         }
 
         public abstract string Evaluate(string input);
-
     }
 }

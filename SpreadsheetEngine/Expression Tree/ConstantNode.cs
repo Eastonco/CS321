@@ -1,4 +1,8 @@
-﻿using System;
+﻿// <copyright file="ConstantNode.cs" company="Connor Easton (11557902)">
+// Copyright (c) Connor Easton (11557902). All rights reserved.
+// </copyright>
+
+using System;
 using System.Collections.Generic;
 using System.Text;
 
