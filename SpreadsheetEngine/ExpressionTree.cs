@@ -100,7 +100,7 @@ namespace Cpts321
                     }
                     else if (this.operatorNodeFactory.IsOperator(c))
                     {
-                        if (operators.Count == 0 || this.IsLeftParenthesis(c))
+                        if (operators.Count == 0 || this.IsLeftParenthesis(operators.Peek()))
                         {
                             operators.Push(c);
                         }

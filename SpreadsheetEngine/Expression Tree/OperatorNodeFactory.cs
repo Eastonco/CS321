@@ -50,6 +50,7 @@ namespace ExpressionTree
                     return (OperatorNode)operatorNodeObject;
                 }
             }
+
             throw new Exception("Unhandeled operator");
         }
 
@@ -73,6 +74,10 @@ namespace ExpressionTree
                         precedenceValue = (ushort)propertyValue;
                     }
                 }
+            }
+            else if (op == '(' || op == ')')
+            {
+                precedenceValue = 5;
             }
 
             return precedenceValue;
