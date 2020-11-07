@@ -2,7 +2,9 @@
 // Copyright (c) Connor Easton (11557902). All rights reserved.
 // </copyright>
 
+using System;
 using System.ComponentModel;
+using System.Text.RegularExpressions;
 
 namespace Cpts321
 {
@@ -45,6 +47,8 @@ namespace Cpts321
         private void PropertyCellChanged(object sender, PropertyChangedEventArgs e)
         {
             this.CellPropertyChanged?.Invoke(sender, e);
+
+            RefrenceCell c = sender as RefrenceCell;
         }
 
         /// <summary>
@@ -76,17 +80,31 @@ namespace Cpts321
             /// <returns>the value.</returns>
             public override string Evaluate(string input)
             {
-                var target = this.parentSpreadsheet.GetCell(input);
+                ExpressionTree exp = new ExpressionTree(input);
+                string pattern = @"[A-Z](?:50|[1-4][0-9]|[1-9])";
 
-                target.PropertyChanged += (sender, e) => this.NotifyPropertyChanged(nameof(this.Value));
-                target.PropertyChanged += this.RefrencePropertyChanged;
+                
+                SpreadsheetCell target;
 
-                if (target == null)
+                foreach (Match m in Regex.Matches(input, pattern))
                 {
-                    return null;
+                    try
+                    {
+                        target = this.parentSpreadsheet.GetCell(m.Value);
+
+                        exp.SetVariable(m.Value, Convert.ToDouble(target.Value));
+
+                        target.PropertyChanged += (sender, e) => this.NotifyPropertyChanged(nameof(this.Value));
+                        target.PropertyChanged += this.RefrencePropertyChanged;
+                    }
+                    catch
+                    {
+                        return "!CellNotDefined";
+                    }
+
                 }
 
-                return target.Value;
+                return exp.Evaluate().ToString();
             }
 
             /// <summary>

@@ -36,7 +36,7 @@ namespace Cpts321
         /// <param name="propertyName">property name.</param>
         protected void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+
             if (this._text.StartsWith("="))
             {
                 this._value = this.Evaluate(this.Text.Substring(1));
@@ -45,6 +45,8 @@ namespace Cpts321
             {
                 this._value = this._text;
             }
+
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         /// <summary>
