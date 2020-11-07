@@ -36,9 +36,40 @@ namespace Cpts321.Tests
             var cell2 = sheet.GetCell("B1");
             Assert.IsNotNull(cell2);
             Assert.IsNotNull(cell1);
-            cell1.Text = "Testing";
+            cell1.Text = "83";
             cell2.Text = "=A1";
             Assert.AreEqual(cell1.Value, cell2.Value);
+        }
+
+        /// <summary>
+        /// testing refrence cell update.
+        /// </summary>
+        [Test]
+        public void SpreadsheetExpTree()
+        {
+            var sheet = new Spreadsheet(1, 1);
+            var cell1 = sheet.GetCell("A1");
+            Assert.IsNotNull(cell1);
+            cell1.Text = "=4*20";
+            Assert.AreEqual("80", cell1.Value);
+        }
+
+        /// <summary>
+        /// testing refrence cell update.
+        /// </summary>
+        [Test]
+        public void SpreadsheetRefrenceUpdate()
+        {
+            var sheet = new Spreadsheet(1, 2);
+            var cell1 = sheet.GetCell("A1");
+            var cell2 = sheet.GetCell("B1");
+            Assert.IsNotNull(cell1);
+            Assert.IsNotNull(cell2);
+            cell1.Text = "20";
+            cell2.Text = "=A1";
+            Assert.AreEqual("20", cell2.Value);
+            cell1.Text = "40";
+            Assert.AreEqual("40", cell2.Value);
         }
     }
 }
