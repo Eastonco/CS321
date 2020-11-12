@@ -6,6 +6,7 @@ namespace Spreadsheet_Connor_Easton
 {
     using System;
     using System.ComponentModel;
+    using System.Drawing;
     using System.Windows.Forms;
     using Cpts321;
 
@@ -52,6 +53,7 @@ namespace Spreadsheet_Connor_Easton
         {
             SpreadsheetCell cell = (SpreadsheetCell)sender;
             this.dataGridView1[cell.ColumnIndex, cell.RowIndex].Value = this.engine.Sheet[cell.RowIndex, cell.ColumnIndex].Value;
+            this.dataGridView1[cell.ColumnIndex, cell.RowIndex].Style.BackColor = Color.FromArgb((int)(this.engine.Sheet[cell.RowIndex, cell.ColumnIndex].BGColor));
         }
 
         private void DataGridView1_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
@@ -79,12 +81,22 @@ namespace Spreadsheet_Connor_Easton
                 this.engine.Sheet[i - 1, 1].Text = "This is cell B" + i;
                 this.engine.Sheet[i - 1, 0].Text = "=B" + i;
             }
+        }
 
-            for (int i = 0; i < 50; i++)
+        private void changeBackgroundColorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ColorDialog MyDialog = new ColorDialog();
+            // Keeps the user from selecting a custom color.
+            MyDialog.AllowFullOpen = true;
+            // Allows the user to get help. (The default is false.)
+            MyDialog.ShowHelp = true;
+
+            // Update the text box color if the user clicks OK.
+            if (MyDialog.ShowDialog() == DialogResult.OK)
             {
-                for (int j = 0; j < 26; j++)
+                foreach (DataGridViewCell cell in this.dataGridView1.SelectedCells)
                 {
-                    this.dataGridView1[j, i].Value = this.engine.Sheet[i, j].Value;
+                    this.engine.Sheet[cell.RowIndex, cell.ColumnIndex].BGColor = (uint)MyDialog.Color.ToArgb();
                 }
             }
         }

@@ -31,6 +31,8 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.demoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cellToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.changeBackgroundColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -55,7 +57,8 @@
             this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.demoToolStripMenuItem});
+            this.demoToolStripMenuItem,
+            this.cellToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(952, 42);
@@ -68,6 +71,21 @@
             this.demoToolStripMenuItem.Size = new System.Drawing.Size(100, 38);
             this.demoToolStripMenuItem.Text = "Demo";
             this.demoToolStripMenuItem.Click += new System.EventHandler(this.DemoToolStripMenuItem_Click);
+            // 
+            // cellToolStripMenuItem
+            // 
+            this.cellToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.changeBackgroundColorToolStripMenuItem});
+            this.cellToolStripMenuItem.Name = "cellToolStripMenuItem";
+            this.cellToolStripMenuItem.Size = new System.Drawing.Size(75, 38);
+            this.cellToolStripMenuItem.Text = "Cell";
+            // 
+            // changeBackgroundColorToolStripMenuItem
+            // 
+            this.changeBackgroundColorToolStripMenuItem.Name = "changeBackgroundColorToolStripMenuItem";
+            this.changeBackgroundColorToolStripMenuItem.Size = new System.Drawing.Size(429, 44);
+            this.changeBackgroundColorToolStripMenuItem.Text = "Change Background Color";
+            this.changeBackgroundColorToolStripMenuItem.Click += new System.EventHandler(this.changeBackgroundColorToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -93,6 +111,8 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem demoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cellToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem changeBackgroundColorToolStripMenuItem;
     }
 }
 

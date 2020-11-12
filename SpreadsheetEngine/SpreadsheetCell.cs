@@ -23,6 +23,7 @@ namespace Cpts321
             this.RowIndex = row;
             this.ColumnIndex = column;
             this.Text = string.Empty;
+            this.BGColor = 0xFFFFFFFF;
         }
 
         /// <summary>
@@ -64,13 +65,16 @@ namespace Cpts321
         /// </summary>
         protected string _value;
 
+        protected uint color;
+
+
         /// <summary>
         /// private text.
         /// </summary>
         protected string _text;
 
         /// <summary>
-        /// Text.
+        /// Gets or sets text.
         /// </summary>
         public string Text
         {
@@ -94,7 +98,7 @@ namespace Cpts321
         }
 
         /// <summary>
-        /// Value.
+        /// Gets or sets value.
         /// </summary>
         public virtual string Value
         {
@@ -109,6 +113,36 @@ namespace Cpts321
             }
         }
 
+        /// <summary>
+        /// Gets or sets BGColor.
+        /// </summary>
+        public uint BGColor
+        {
+            get
+            {
+                return this.color;
+            }
+
+            set
+            {
+                if (value == this.color)
+                {
+                    return;
+                }
+                else
+                {
+                    this.color = value;
+                    this.NotifyPropertyChanged();
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// abstract evaluate method.
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public abstract string Evaluate(string input);
     }
 }
