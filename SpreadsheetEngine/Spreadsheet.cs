@@ -4,7 +4,9 @@
 
 using System;
 using System.ComponentModel;
+using System.Collections;
 using System.Text.RegularExpressions;
+using System.Collections.Generic;
 
 namespace Cpts321
 {
@@ -23,6 +25,8 @@ namespace Cpts321
             this.Sheet = new SpreadsheetCell[rows, columns];
             this.ColumnCount = columns;
             this.RowCount = rows;
+            this.UndoEmpty = true;
+            this.RedoEmpty = true;
 
             for (int i = 0; i < rows; i++)
             {
@@ -83,7 +87,6 @@ namespace Cpts321
                 ExpressionTree exp = new ExpressionTree(input);
                 string pattern = @"[A-Z](?:50|[1-4][0-9]|[1-9])";
 
-                
                 SpreadsheetCell target;
 
                 foreach (Match m in Regex.Matches(input, pattern))
@@ -157,6 +160,20 @@ namespace Cpts321
         /// </summary>
         public int RowCount { get; }
 
+        public Stack<ChangeCommand> UndoStack = new Stack<ChangeCommand>();
+
+        public Stack<ChangeCommand> RedoStack = new Stack<ChangeCommand>();
+
+        /// <summary>
+        /// Gets or sets a value indicating whether gets if undo stack is empty.
+        /// </summary>
+        public bool UndoEmpty { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether gets if redo stack is empty
+        /// </summary>
+        public bool RedoEmpty { get; set; }
+
         /// <summary>
         /// gets the cell from string locaiton.
         /// </summary>
@@ -169,6 +186,46 @@ namespace Cpts321
             var row = int.Parse(location.Substring(1));
 
             return this.Sheet[row - 1, columnNum - 1];
+        }
+
+        public void UndoAction()
+        {
+            if (!this.UndoEmpty)
+            {
+                ChangeCommand command = this.UndoStack.Pop();
+                command.Undo();
+                this.RedoStack.Push(command);
+                this.RedoEmpty = false;
+            }
+
+            if(this.UndoStack.Count == 0)
+            {
+                this.UndoEmpty = true;
+            }
+            else
+            {
+                this.UndoEmpty = false;
+            }
+        }
+
+        public void RedoAction()
+        {
+            if (!this.RedoEmpty)
+            {
+                ChangeCommand command = this.RedoStack.Pop();
+                command.Redo();
+                this.UndoStack.Push(command);
+                this.UndoEmpty = false;
+            }
+
+            if (this.RedoStack.Count == 0)
+            {
+                this.RedoEmpty = true;
+            }
+            else
+            {
+                this.RedoEmpty = false;
+            }
         }
 
         /// <summary>

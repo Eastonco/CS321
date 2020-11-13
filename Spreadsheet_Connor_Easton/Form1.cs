@@ -47,6 +47,8 @@ namespace Spreadsheet_Connor_Easton
             }
 
             this.engine.CellPropertyChanged += this.SpreadsheetChangedEvent;
+            this.undoToolStripMenuItem.Enabled = false;
+            this.redoToolStripMenuItem.Enabled = false;
         }
 
         private void SpreadsheetChangedEvent(object sender, PropertyChangedEventArgs e)
@@ -63,6 +65,12 @@ namespace Spreadsheet_Connor_Easton
 
         private void DataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
+            SpreadsheetCell cell = this.engine.Sheet[e.RowIndex, e.ColumnIndex];
+            TextChange newchange = new TextChange(ref cell, cell.Text, this.dataGridView1[e.ColumnIndex, e.RowIndex].Value?.ToString());
+            this.engine.UndoStack.Push(new TextChangeCommand(newchange));
+            this.engine.UndoEmpty = false;
+            this.undoToolStripMenuItem.Enabled = true;
+
             this.engine.Sheet[e.RowIndex, e.ColumnIndex].Text = this.dataGridView1[e.ColumnIndex, e.RowIndex].Value?.ToString() ?? string.Empty;
             this.dataGridView1[e.ColumnIndex, e.RowIndex].Value = this.engine.Sheet[e.RowIndex, e.ColumnIndex].Value;
         }
@@ -92,12 +100,48 @@ namespace Spreadsheet_Connor_Easton
             MyDialog.ShowHelp = true;
 
             // Update the text box color if the user clicks OK.
+
             if (MyDialog.ShowDialog() == DialogResult.OK)
             {
+                ColorChange changes = new ColorChange();
                 foreach (DataGridViewCell cell in this.dataGridView1.SelectedCells)
                 {
-                    this.engine.Sheet[cell.RowIndex, cell.ColumnIndex].BGColor = (uint)MyDialog.Color.ToArgb();
+                    SpreadsheetCell engineCell = this.engine.Sheet[cell.RowIndex, cell.ColumnIndex];
+
+                    changes.AddCell(ref engineCell, engineCell.BGColor, (uint)MyDialog.Color.ToArgb());
+
+                    engineCell.BGColor = (uint)MyDialog.Color.ToArgb();
                 }
+
+                this.engine.UndoStack.Push(new ColorChangeCommand(changes));
+                this.engine.UndoEmpty = false;
+                this.undoToolStripMenuItem.Enabled = true;
+            }
+        }
+
+        private void undoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!this.engine.UndoEmpty)
+            {
+                this.engine.UndoAction();
+                this.redoToolStripMenuItem.Enabled = true;
+            }
+            if (this.engine.UndoEmpty)
+            {
+                this.undoToolStripMenuItem.Enabled = false;
+            }
+        }
+
+        private void redoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!this.engine.RedoEmpty)
+            {
+                this.engine.RedoAction();
+                this.undoToolStripMenuItem.Enabled = true;
+            }
+            if (this.engine.RedoEmpty)
+            {
+                this.redoToolStripMenuItem.Enabled = false;
             }
         }
     }
