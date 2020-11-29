@@ -5,6 +5,8 @@
 using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Xml;
+
 
 namespace Cpts321
 {
@@ -144,5 +146,15 @@ namespace Cpts321
         /// <param name="input"></param>
         /// <returns></returns>
         public abstract string Evaluate(string input);
+
+        public void WriteXml(XmlWriter writer)
+        {
+            string location = (char)(this.ColumnIndex + 'A') + (this.RowIndex + 1).ToString();
+            writer.WriteStartElement("cell");
+            writer.WriteAttributeString("name", location);
+            writer.WriteElementString("bgcolor", this.BGColor.ToString());
+            writer.WriteElementString("text", this.Text);
+            writer.WriteEndElement();
+        }
     }
 }
