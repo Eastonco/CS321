@@ -8,6 +8,10 @@ namespace Spreadsheet_Connor_Easton
     using System.ComponentModel;
     using System.Drawing;
     using System.Windows.Forms;
+    using System.IO;
+    using System.Text;
+    using System.Xml;
+    using System.Xml.Schema;
     using Cpts321;
 
     /// <summary>
@@ -142,6 +146,40 @@ namespace Spreadsheet_Connor_Easton
             if (this.engine.RedoEmpty)
             {
                 this.redoToolStripMenuItem.Enabled = false;
+            }
+        }
+
+        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Stream myStream;
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+
+            saveFileDialog1.Filter = "xml files (*.xml)|*.xml|All files (*.*)|*.*";
+            saveFileDialog1.RestoreDirectory = true;
+
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                if ((myStream = saveFileDialog1.OpenFile()) != null)
+                {
+                    this.engine.SaveSpreadsheet(myStream);
+                    myStream.Close();
+                }
+            }
+        }
+
+
+
+        private void loadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Title = "Find file";
+            ofd.Filter = "XML files|*.xml";
+
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                FileStream sr = new FileStream(ofd.FileName, FileMode.Open);
+                this.engine.LoadFile(sr);
+                sr.Close();
             }
         }
     }
