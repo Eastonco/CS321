@@ -7,6 +7,9 @@ using System.ComponentModel;
 using System.Collections;
 using System.Text.RegularExpressions;
 using System.Collections.Generic;
+using System.Xml;
+using System.IO;
+
 
 namespace Cpts321
 {
@@ -27,6 +30,8 @@ namespace Cpts321
             this.RowCount = rows;
             this.UndoEmpty = true;
             this.RedoEmpty = true;
+            this.UndoStack.Clear();
+            this.RedoStack.Clear();
 
             for (int i = 0; i < rows; i++)
             {
@@ -153,12 +158,12 @@ namespace Cpts321
         /// <summary>
         /// Gets column count.
         /// </summary>
-        public int ColumnCount { get; }
+        public int ColumnCount { get; set; }
 
         /// <summary>
         /// Gets row count.
         /// </summary>
-        public int RowCount { get; }
+        public int RowCount { get; set; }
 
         public Stack<ChangeCommand> UndoStack = new Stack<ChangeCommand>();
 
@@ -228,6 +233,137 @@ namespace Cpts321
             }
         }
 
+        public void SaveSpreadsheet(Stream outfile)
+        {
+            XmlWriter xmlWriter = XmlWriter.Create(outfile);
+            xmlWriter.WriteStartElement("spreadsheet");
+            xmlWriter.WriteAttributeString("columns", this.ColumnCount.ToString());
+            xmlWriter.WriteAttributeString("rows", this.RowCount.ToString());
+
+            foreach (SpreadsheetCell cell in this.Sheet) 
+            {
+                if (!IsDefaultCell(cell)) 
+                {
+                    cell.WriteXml(xmlWriter);  
+                }
+            }
+            xmlWriter.WriteEndElement();
+            xmlWriter.Close();
+        }
+
+        private bool IsDefaultCell(SpreadsheetCell cell)
+        {
+            return cell.Text == string.Empty && cell.BGColor == 0xFFFFFFFF;
+        }
+
+
+        /// <summary>
+        /// Loads a file given a string.
+        /// </summary>
+        /// <param name="filename">filename.</param>
+        public void LoadFile(Stream file)
+        {
+            int colcount = 26, rowcount = 50;
+            XmlDocument doc = new XmlDocument();
+            doc.Load(file);
+
+            foreach (XmlNode node in doc.DocumentElement.Attributes)
+            {
+                switch (node.Name)
+                {
+                    case "columns":
+                        colcount = int.Parse(node.Value);
+                        break;
+                    case "rows":
+                        rowcount = int.Parse(node.Value);
+                        break;
+                }
+            }
+
+            this.Reconstruct(rowcount, colcount);
+
+            SpreadsheetCell cell = this.GetCell("A1");
+
+            foreach (XmlNode node in doc.DocumentElement)
+            {
+                if(node.Name == "cell")
+                {
+                    foreach (XmlAttribute attribute in node.Attributes) //get the name 
+                    {
+                        if (attribute.Name == "name")
+                        {
+                            cell = this.GetCell(attribute.Value);
+                            break;
+                        }
+                    }
+
+                    foreach(XmlNode child in node.ChildNodes)
+                    {
+                        switch (child.Name)
+                        {
+                            case "bgcolor":
+                                cell.BGColor = uint.Parse(child.InnerText);
+                                break;
+                            case "text":
+                                cell.Text = child.InnerText;
+                                break;
+                        }
+                    }
+
+
+
+                }
+            }
+
+
+
+            /*
+            while (textReader.Read())
+            {
+                if (textReader.Name == "spreadsheet")
+                {
+                    for (int i = 0; i < textReader.AttributeCount; i++)
+                    {
+                        textReader.MoveToAttribute(i);
+                        switch (textReader.Name)
+                        {
+                            case "Colums":
+                                int.TryParse(textReader.Value, out colcount);
+                                break;
+                            case "Rows":
+                                int.TryParse(textReader.Value, out rowcount);
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+
+                    this.Reconstruct(rowcount, colcount);
+                }
+
+                if (textReader.Name == "Cell")
+                {
+                    for (int i = 0; i < textReader.AttributeCount; i++)
+                    {
+                        textReader.MoveToAttribute(i);
+                        switch (textReader.Name)
+                        {
+                            case "Name":
+                                int.TryParse(textReader.Value, out colcount);
+                                break;
+                            case "Rows":
+                                int.TryParse(textReader.Value, out rowcount);
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+
+                    this.Reconstruct(rowcount, colcount);
+                }
+            }*/
+        }
+
         /// <summary>
         /// gets the cell.
         /// </summary>
@@ -237,6 +373,26 @@ namespace Cpts321
         public SpreadsheetCell GetCell(int row, int column)
         {
             return this.Sheet[row, column];
+        }
+
+        private void Reconstruct(int rows, int columns)
+        {
+            this.Sheet = new SpreadsheetCell[rows, columns];
+            this.ColumnCount = columns;
+            this.RowCount = rows;
+            this.UndoEmpty = true;
+            this.RedoEmpty = true;
+            this.UndoStack.Clear();
+            this.RedoStack.Clear();
+
+            for (int i = 0; i < rows; i++)
+            {
+                for (int j = 0; j < columns; j++)
+                {
+                    this.Sheet[i, j] = new RefrenceCell(i, j, this);
+                    this.Sheet[i, j].PropertyChanged += this.PropertyCellChanged;
+                }
+            }
         }
     }
 }
